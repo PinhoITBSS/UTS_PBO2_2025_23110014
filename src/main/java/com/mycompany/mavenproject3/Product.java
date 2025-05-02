@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -9,12 +10,15 @@ package com.mycompany.mavenproject3;
  * @author ASUS
  */
 public class Product {
+    private ProductForm productForm;
     private int id;
     private String code;
     private String name;
     private String category;
     private double price;
     private int stock;
+    
+    
 
     public Product(int id, String code, String name, String category, double price, int stock) {
         this.id = id;

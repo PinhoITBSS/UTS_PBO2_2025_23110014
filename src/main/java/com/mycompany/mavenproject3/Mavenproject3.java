@@ -1,14 +1,21 @@
 package com.mycompany.mavenproject3;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Mavenproject3 extends JFrame implements Runnable {
-    private String text;
+    private final String text;
     private int x;
     private int width;
-    private BannerPanel bannerPanel;
-    private JButton addProductButton;
+    private final BannerPanel bannerPanel;
+    private final JButton addProductButton;
+    private ProductForm productForm;
+
 
     public Mavenproject3(String text) {
         this.text = text;
@@ -27,6 +34,7 @@ public class Mavenproject3 extends JFrame implements Runnable {
         addProductButton = new JButton("Kelola Produk");
         bottomPanel.add(addProductButton);
         add(bottomPanel, BorderLayout.SOUTH);
+        ProductForm ProductFormA = new ProductForm();
         
         addProductButton.addActionListener(e -> {
             new ProductForm().setVisible(true);
@@ -36,6 +44,10 @@ public class Mavenproject3 extends JFrame implements Runnable {
 
         Thread thread = new Thread(this);
         thread.start();
+    }
+
+    public BannerPanel getBannerPanel() {
+        return bannerPanel;
     }
 
     class BannerPanel extends JPanel {

@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -8,14 +9,21 @@ package com.mycompany.mavenproject3;
  *
  * @author ASUS
  */
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+
 public class ProductForm extends JFrame {
+    
     private JTable drinkTable;
     private DefaultTableModel tableModel;
     private JTextField codeField;
@@ -24,16 +32,18 @@ public class ProductForm extends JFrame {
     private JTextField priceField;
     private JTextField stockField;
     private JButton saveButton;
-
+    
     public ProductForm() {
         List<Product> products = new ArrayList<>();
         products.add(new Product(1, "P001", "Americano", "Coffee", 18000, 10));
         products.add(new Product(2, "P002", "Pandan Latte", "Coffee", 15000, 8));
+        products.add(new Product(3, "P003", "Chocolate Banana", "Coffee", 15000, 8));
         
         setTitle("WK. Cuan | Stok Barang");
         setSize(600, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
         
         // Panel form pemesanan
         JPanel formPanel = new JPanel();
