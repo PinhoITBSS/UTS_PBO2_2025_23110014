@@ -1,43 +1,38 @@
 package com.mycompany.mavenproject3;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Mavenproject3 extends JFrame implements Runnable {
-    private final String text;
+    private String text;
     private int x;
     private int width;
-    private final BannerPanel bannerPanel;
-    private final JButton addProductButton;
-    private ProductForm productForm;
+    private BannerPanel bannerPanel;
+    private JButton addProductButton;
+    private List<Product> products;
 
+    public Mavenproject3(List<Product> products) {
+        this.products = products;
+        this.text = generateProductText(products);
 
-    public Mavenproject3(String text) {
-        this.text = text;
         setTitle("WK. STI Chill");
         setSize(600, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel teks berjalan
         bannerPanel = new BannerPanel();
         add(bannerPanel, BorderLayout.CENTER);
 
-        // Tombol "Kelola Produk"
         JPanel bottomPanel = new JPanel();
         addProductButton = new JButton("Kelola Produk");
         bottomPanel.add(addProductButton);
         add(bottomPanel, BorderLayout.SOUTH);
-        ProductForm ProductFormA = new ProductForm();
-        
+
         addProductButton.addActionListener(e -> {
-            new ProductForm().setVisible(true);
+            new ProductForm(products, this).setVisible(true);
         });
 
         setVisible(true);
@@ -46,8 +41,17 @@ public class Mavenproject3 extends JFrame implements Runnable {
         thread.start();
     }
 
-    public BannerPanel getBannerPanel() {
-        return bannerPanel;
+    public void refreshBanner() {
+        this.text = generateProductText(products);
+    }
+
+    private String generateProductText(List<Product> products) {
+        StringBuilder sb = new StringBuilder("Menu yang tersedia: ");
+        for (int i = 0; i < products.size(); i++) {
+            sb.append(products.get(i).getName());
+            if (i < products.size() - 1) sb.append(" | ");
+        }
+        return sb.toString();
     }
 
     class BannerPanel extends JPanel {
@@ -78,6 +82,9 @@ public class Mavenproject3 extends JFrame implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Mavenproject3("Menu yang tersedia: Americano | Pandan Latte | Aren Latte | Matcha Frappucino | Jus Apel");
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(1, "P001", "Americano", "Coffee", 18000, 10));
+        products.add(new Product(2, "P002", "Pandan Latte", "Coffee", 15000, 8));
+        new Mavenproject3(products);
     }
 }
